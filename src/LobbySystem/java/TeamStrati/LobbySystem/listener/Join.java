@@ -52,7 +52,7 @@ public class Join implements Listener {
         ItemMeta NaviMeta = Navi.getItemMeta();
         NaviMeta.setDisplayName("§c§lNavigator");
         Navi.setItemMeta(NaviMeta);
-        p.getInventory().setItem(4, Navi);
+        p.getInventory().setItem(3, Navi);
         if (Main.noplayersvisible.contains(e.getPlayer().getUniqueId())) {
             ItemStack Hide = new ItemStack(Material.GRAY_DYE);
             ItemMeta HideMeta = Hide.getItemMeta();
@@ -68,7 +68,7 @@ public class Join implements Listener {
             ItemMeta HideMeta = Hide.getItemMeta();
             HideMeta.setDisplayName("§a§lSpieler sichtbar");
             Hide.setItemMeta(HideMeta);
-            e.getPlayer().getInventory().setItem(6, Hide);
+            e.getPlayer().getInventory().setItem(5, Hide);
         }
         for (java.util.UUID onlinePlayer2 : Main.noplayersvisible) {
             if (Bukkit.getPlayer(onlinePlayer2) != null) {
