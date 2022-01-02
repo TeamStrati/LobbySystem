@@ -21,3 +21,6 @@ commands:
 
   build:
     description: Build
+
+  map:
+    description: Image Maps
