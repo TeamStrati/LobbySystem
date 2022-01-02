@@ -17,6 +17,7 @@
 - Set the Prefix
 - Changes the Time of the Grappling Hook Cooldown
 - Changes the Prices of the Shop
+- Change the Permissions
 
 ### **Playerdata.yml:**
 - Stores the Orders of the Items
