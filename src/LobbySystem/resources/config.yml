@@ -16,6 +16,7 @@ Price:
   EmeraldHalo: 0
   AngryHead: 0
   fire: 0
+  soul: 0
 
   #Items
   grapplingHook: 0
@@ -28,6 +29,7 @@ Permissions:
     EmeraldHalo: 'LobbySystem.Trails.EmeraldHalo'
     AngryVillager: 'LobbySystem.Trails.AngryVillager'
     fire: 'LobbySystem.Trails.fire'
+    soul: 'LobbySystem.Trails.soul'
   build: 'LobbySystem.build'
   warps: 'LobbySystem.warps'
   map: 'LobbySystem.map'

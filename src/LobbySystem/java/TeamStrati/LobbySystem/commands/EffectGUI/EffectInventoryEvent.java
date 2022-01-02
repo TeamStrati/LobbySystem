@@ -117,6 +117,18 @@ public class EffectInventoryEvent implements Listener {
                                 player.sendMessage(prefix + "Du hast diesen Trail noch nicht freigeschlaten. Kaufe ihn mit /shop");
                                break;
                             }
+                        case 9:
+                            String SoulPermission = yamlConfiguration.getString("Permissions.Trails.soul");
+                            if (player.hasPermission(SoulPermission)) {
+                                trails.SoulTrail();
+                                player.closeInventory();
+                                player.updateInventory();
+                                break;
+
+                            }else {
+                                player.sendMessage(prefix + "Du hast diesen Trail noch nicht freigeschlaten. Kaufe ihn mit /shop");
+                                break;
+                            }
                         default:
                             break;
                     }

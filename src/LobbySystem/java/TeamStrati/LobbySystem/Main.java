@@ -323,7 +323,7 @@ public final class Main extends JavaPlugin {
 
         ItemStack Fire = new ItemStack(Material.CAMPFIRE, 1);
         ItemMeta Fire_Meta = Fire.getItemMeta();
-        Fire_Meta.setDisplayName(ChatColor.DARK_RED + "Fire Trail");
+        Fire_Meta.setDisplayName(ChatColor.GREEN + "Fire Trail");
         ArrayList<String> Fire_lore = new ArrayList<>();
         Integer PriceFire = yamlConfiguration.getInt("Price.fire");
         Fire_lore.add(ChatColor.GOLD + "Kaufe diesen Trail " + ChatColor.GREEN + "("+PriceFire+" Coins)");
@@ -331,6 +331,17 @@ public final class Main extends JavaPlugin {
         Fire.setItemMeta(Fire_Meta);
 
         ShopMenu.setItem(13, Fire);
+
+        ItemStack soul = new ItemStack(Material.SOUL_SAND, 1);
+        ItemMeta soul_Meta = soul.getItemMeta();
+        soul_Meta.setDisplayName(ChatColor.GREEN + "soul");
+        ArrayList<String> soul_lore = new ArrayList<>();
+        Integer Pricesoul = yamlConfiguration.getInt("Price.soul");
+        soul_lore.add(ChatColor.GOLD + "Kaufe diesen Trail " + ChatColor.GREEN + "("+Pricesoul+" Coins)");
+        soul_Meta.setLore(soul_lore);
+        soul.setItemMeta(soul_Meta);
+
+        ShopMenu.setItem(14, soul);
 
 
 
@@ -377,9 +388,15 @@ public final class Main extends JavaPlugin {
 
         item = new ItemStack(Material.CAMPFIRE);
         meta = item.getItemMeta();
-        meta.setDisplayName(ChatColor.GREEN + "Fire Trail");
+        meta.setDisplayName(ChatColor.DARK_RED + "Fire Trail");
         item.setItemMeta(meta);
         EffectMenu.setItem(8, item);
+
+        item = new ItemStack(Material.SOUL_SAND);
+        meta = item.getItemMeta();
+        meta.setDisplayName(ChatColor.AQUA + "Soul Trail");
+        item.setItemMeta(meta);
+        EffectMenu.setItem(9, item);
 
 
         //schließen
