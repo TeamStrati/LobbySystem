@@ -19,16 +19,16 @@
 - Changes the Prices of the Shop
 - Change the Permissions
 
-### **Playerdata.yml:**
+![Playerdata](/Pictures/playerdata.png)
 - Stores the Orders of the Items
 - Ability to remove Items from an particular Person
 - Works with UUIDs
 
-### **Warps.yml:**
+![Warps](/Pictures/warps.png)
 - Stores your warps
 - when you set a warp ```spawn``` it will automaticly be your world spawn
 
-### **Todo:**
+![TODO](/Pictures/todo.png)
 - [x] Easy Config
 - [ ] More Effects
 - [ ] More Tools
