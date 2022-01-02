@@ -1,0 +1,170 @@
+package lobby_shop.LobbyShop.commands.ShopGUI;
+
+import lobby_shop.LobbyShop.Main;
+import lobby_shop.LobbyShop.commands.ItemManager.ItemManager;
+import net.luckperms.api.LuckPermsProvider;
+import net.luckperms.api.model.user.User;
+import net.milkbowl.vault.economy.EconomyResponse;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.Inventory;
+
+import java.io.File;
+import java.io.IOException;
+
+import static lobby_shop.LobbyShop.Main.*;
+
+
+
+public class ShopInventoryEvent implements Listener {
+
+    Main plugin;
+
+    String UUID;
+
+    private File config = new File("plugins//LobbyShop//config.yml");
+    private YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(config);
+
+    private File PlayerData = new File("plugins//LobbyShop//playerdata.yml");
+    private YamlConfiguration PlayerDataList = YamlConfiguration.loadConfiguration(PlayerData);
+
+    public ShopInventoryEvent(Main plugin) {
+        this.plugin = plugin;
+    }
+
+    @EventHandler
+    public void onMenuClick(InventoryClickEvent e) {
+        Player player = (Player) e.getWhoClicked();
+        try {
+
+
+            Inventory inventory = e.getInventory();
+
+            if (inventory != null) {
+
+                if (e.getView().getTitle().equalsIgnoreCase(ChatColor.YELLOW + "Lobby Shop")) {
+
+                    e.setCancelled(true);
+                    try {
+
+                        //Shop Menü
+                        if (e.getCurrentItem().getType() == Material.BARRIER) {
+                            player.closeInventory();
+                        }
+                        if (e.getCurrentItem().getType() == Material.FISHING_ROD) {
+
+
+                            //In config eintragen:
+                            UUID = player.getUniqueId().toString();
+                            if (!PlayerDataList.contains("Orders.GrapplingHook." + UUID)) {
+
+                                PlayerDataList.set("Orders.GrapplingHook." + UUID, true);
+
+                                try {
+                                    PlayerDataList.save(this.PlayerData);
+                                } catch (IOException ex) {
+                                    ex.printStackTrace();
+                                }
+                                Integer PriceGH = yamlConfiguration.getInt("Price.grapplingHook");
+                                if (econ.getBalance(player) >= PriceGH) {
+                                    EconomyResponse r = econ.withdrawPlayer(player, PriceGH);
+                                    if (r.transactionSuccess()) {
+                                        player.getInventory().addItem(ItemManager.GrapplingHook);
+                                        player.closeInventory();
+                                        player.sendMessage(String.format(prefix + "Du hast für "+ PriceGH +" Coins eine Grappling Hook gekauft!"));
+                                    } else {
+                                        player.sendMessage(String.format(prefix + "An error occured: %s", r.errorMessage));
+                                    }
+                                } else {
+                                    player.sendMessage(String.format(prefix + "Du hast leider nicht genug geld"));
+                                    player.closeInventory();
+                                }
+
+                            } else {
+                                player.closeInventory();
+                                player.sendMessage(prefix + "Du hast schon eine Grappling Hook, wenn du geld ausgeben möchtest mach" + ChatColor.DARK_PURPLE + " /spenden");
+                            }
+                        }
+                        if (e.getCurrentItem().getType() == Material.POPPY) {
+                            Integer PriceHeart = yamlConfiguration.getInt("Price.heart");
+                            if (!player.hasPermission("Trails.heart")) {
+                                if (econ.getBalance(player) >= PriceHeart) {
+                                    EconomyResponse r = econ.withdrawPlayer(player, PriceHeart);
+                                    if (r.transactionSuccess()) {
+
+                                        player.closeInventory();
+                                        player.sendMessage(String.format(prefix + "Du hast für "+ PriceHeart +" Coins den Heart Effect Trail gekauft!"));
+
+                                        User user = LuckPermsProvider.get().getPlayerAdapter(Player.class).getUser(player);
+                                        //Permission für Heart Trail geben
+                                        plugin.addPermission(user, "Trails.heart");
+
+
+                                    } else {
+                                        player.sendMessage(String.format(prefix + "An error occured: %s", r.errorMessage));
+                                    }
+                                } else {
+                                    player.sendMessage(String.format(prefix + "Du hast leider nicht genug geld"));
+                                    player.closeInventory();
+                                }
+
+
+                            } else {
+                                player.closeInventory();
+                                player.sendMessage(prefix + "Du besitzt diesen Trail bereits, wenn du geld ausgeben möchtest mach" + ChatColor.DARK_PURPLE + " /spenden");
+                            }
+                        }
+                        if (e.getCurrentItem().getType() == Material.TOTEM_OF_UNDYING) {
+                            if (!player.hasPermission("Trails.totem")) {
+                                Integer PriceTotem = yamlConfiguration.getInt("Price.totem");
+                                if (econ.getBalance(player) >= PriceTotem) {
+                                    EconomyResponse r = econ.withdrawPlayer(player, PriceTotem);
+                                    if (r.transactionSuccess()) {
+
+                                        player.closeInventory();
+                                        player.sendMessage(String.format(prefix + "Du hast für "+ PriceTotem+ " Coins den Totem Effect Trail gekauft!"));
+
+                                        User user = LuckPermsProvider.get().getPlayerAdapter(Player.class).getUser(player);
+                                        //Permission für Totem Trail geben
+                                        plugin.addPermission(user, "Trails.totem");
+
+
+                                    } else {
+                                        player.sendMessage(String.format(prefix + "An error occured: %s", r.errorMessage));
+                                    }
+                                } else {
+                                    player.sendMessage(String.format(prefix + "Du hast leider nicht genug geld"));
+                                    player.closeInventory();
+                                }
+
+
+                            } else {
+                                player.closeInventory();
+                                player.sendMessage(prefix + "Du besitzt diesen Trail bereits, wenn du geld ausgeben möchtest mach" + ChatColor.DARK_PURPLE + " /spenden");
+                            }
+                        }
+                    }catch (NullPointerException ex){}
+                }
+            } else {
+                return;
+            }
+        }catch (NullPointerException ex){}
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
