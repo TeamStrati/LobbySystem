@@ -1,6 +1,7 @@
 package TeamStrati.LobbySystem.Nubsnils;
 
 import TeamStrati.LobbySystem.Main;
+import TeamStrati.LobbySystem.commands.ItemManager.ItemManager;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -16,8 +17,13 @@ import org.bukkit.plugin.Plugin;
 import java.io.File;
 import java.util.ArrayList;
 
+import static com.google.gson.internal.bind.TypeAdapters.UUID;
+
 
 public class CMD_Build implements CommandExecutor {
+
+    private File PlayerData = new File("plugins//LobbySystem//playerdata.yml");
+    private YamlConfiguration PlayerDataList = YamlConfiguration.loadConfiguration(PlayerData);
 
     private static File config = new File("plugins//LobbySystem//config.yml");
     private static YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(config);
@@ -55,6 +61,11 @@ public class CMD_Build implements CommandExecutor {
                         Hide.setItemMeta(HideMeta);
                         p.getInventory().setItem(6, Hide);
                     }
+                    if (PlayerDataList.contains("Orders.GrapplingHook." + UUID)){
+                        p.getInventory().setItem(0, ItemManager.GrapplingHook);
+
+                    }
+                    p.getInventory().setItem(8, ItemManager.EffectChest);
                     p.sendMessage(Main.prefix + "§aDu hast den §6Build §amode §c§ldeaktivert.");
                 }
                 else {

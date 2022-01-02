@@ -1,7 +1,5 @@
 package TeamStrati.LobbySystem;
 
-import TeamStrati.LobbySystem.ImageMaps.ImageCommand;
-import TeamStrati.LobbySystem.ImageMaps.ImageManager;
 import TeamStrati.LobbySystem.Nubsnils.*;
 import TeamStrati.LobbySystem.commands.EffectGUI.EffectGUI;
 import TeamStrati.LobbySystem.commands.EffectGUI.EffectInventoryEvent;
@@ -105,10 +103,6 @@ public final class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents((Listener)new Navigator(), (Plugin)this);
         Bukkit.getPluginManager().registerEvents((Listener)new PlayerHider(), (Plugin)this);
 
-        ImageManager manager = ImageManager.getInstance();
-        manager.init();
-
-        this.getCommand("map").setExecutor(new ImageCommand());
 
 
         if (!setupEconomy()) {
