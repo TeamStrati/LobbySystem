@@ -59,6 +59,8 @@ public class ImageCommand implements CommandExecutor {
             ImageManager manager = ImageManager.getInstance();
             manager.saveImage(view.getId(), args[0]);
 
+        }else {
+            player.sendMessage(prefix + "Du darfst das nicht benutzen");
         }
         return true;
     }
