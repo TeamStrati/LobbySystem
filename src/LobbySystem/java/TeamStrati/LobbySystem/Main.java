@@ -1,5 +1,6 @@
 package TeamStrati.LobbySystem;
 
+import TeamStrati.LobbySystem.CookieClicker.CookieHandler;
 import TeamStrati.LobbySystem.Nubsnils.*;
 import TeamStrati.LobbySystem.commands.EffectGUI.EffectGUI;
 import TeamStrati.LobbySystem.commands.EffectGUI.EffectInventoryEvent;
@@ -7,13 +8,13 @@ import TeamStrati.LobbySystem.commands.ItemManager.ItemEvents;
 import TeamStrati.LobbySystem.commands.ItemManager.ItemManager;
 import TeamStrati.LobbySystem.commands.ShopGUI.ShopGUI;
 import TeamStrati.LobbySystem.commands.ShopGUI.ShopInventoryEvent;
-import TeamStrati.LobbySystem.commands.spenden;
-
+import TeamStrati.LobbySystem.commands.*;
 import TeamStrati.LobbySystem.listener.CancelInventorySwapEvent;
 import TeamStrati.LobbySystem.listener.Join;
 import TeamStrati.LobbySystem.map.ImageCommand;
 import TeamStrati.LobbySystem.map.ImageManager;
 import TeamStrati.LobbySystem.trails.Quit;
+import me.clip.placeholderapi.PlaceholderAPI;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.model.user.User;
@@ -24,29 +25,29 @@ import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
-import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
 
 import java.io.File;
-
+import java.io.IOException;
 import java.util.*;
+import java.util.function.Function;
 import java.util.logging.Logger;
 
 
 public final class Main extends JavaPlugin {
+
+    private static Main instance;
 
     private static Config cfg;
     public static final Logger log = Logger.getLogger("Minecraft");
@@ -61,18 +62,18 @@ public final class Main extends JavaPlugin {
     //public static String prefix = ChatColor.AQUA + "[" + ChatColor.GREEN + "Teudaria" + ChatColor.AQUA + "]" + ChatColor.YELLOW + " ";
 
 
-
     public static String prefixConfig = "&b[&aTeudaria&b] &e";
     public static String prefix;
     //public static String prefixConfig = yamlConfiguration.getString("Prefix");
     //public static String prefix = ChatColor.translateAlternateColorCodes('&', prefixConfig);
-    public static Main instance;
 
 
     public static ArrayList<UUID> noplayersvisible;
+
     @Override
     public void onEnable() {
         // Plugin startup logic
+
         System.out.println("| | L O B B Y  S Y S T E M| |");
         System.out.println("by TeamStrati");
         System.out.println(" Plugin erfolgreich geladen!");
@@ -91,6 +92,16 @@ public final class Main extends JavaPlugin {
             Bukkit.getPluginManager().disablePlugin((Plugin) this);
             //return false;
         }
+        Bukkit.getPluginManager().registerEvents(new CookieHandler(), this);
+        for (Player all : Bukkit.getOnlinePlayers()) {
+
+            CookieHandler.l.put(all, CookieHandler.cfg.getInt(all.getUniqueId() + ".Cookies"));
+
+
+        }
+
+        //Speed
+        this.getConfig().options().copyDefaults(true);
 
         ImageManager manager = ImageManager.getInstance();
         manager.init();
@@ -100,23 +111,21 @@ public final class Main extends JavaPlugin {
         Main.noplayersvisible = new ArrayList<UUID>();
 
         Main.cfg = new Config("Warps.yml", this.getDataFolder());
-        Main.instance = this;
-        if(yamlConfiguration.getString("Prefix") != null){
+
+        if (yamlConfiguration.getString("Prefix") != null) {
             prefixConfig = yamlConfiguration.getString("Prefix");
-        }else {
+        } else {
             prefixConfig = "[Bitte Prefix setzen oder Neuladen] ";
         }
 
         prefix = ChatColor.translateAlternateColorCodes('&', prefixConfig);
-        this.getCommand("warp").setExecutor((CommandExecutor)new CMD_Warp());
-        this.getCommand("build").setExecutor((CommandExecutor)new CMD_Build());
-        Bukkit.getPluginManager().registerEvents((Listener)new Listeners(), (Plugin)this);
+        this.getCommand("warp").setExecutor((CommandExecutor) new CMD_Warp());
+        this.getCommand("build").setExecutor((CommandExecutor) new CMD_Build());
+        Bukkit.getPluginManager().registerEvents((Listener) new Listeners(), (Plugin) this);
 
 
-
-        Bukkit.getPluginManager().registerEvents((Listener)new Navigator(), (Plugin)this);
-        Bukkit.getPluginManager().registerEvents((Listener)new PlayerHider(), (Plugin)this);
-
+        Bukkit.getPluginManager().registerEvents((Listener) new Navigator(), (Plugin) this);
+        Bukkit.getPluginManager().registerEvents((Listener) new PlayerHider(), (Plugin) this);
 
 
         if (!setupEconomy()) {
@@ -134,8 +143,6 @@ public final class Main extends JavaPlugin {
         }
 
 
-
-
         getCommand("spenden").setExecutor(new spenden());
 
 
@@ -150,10 +157,14 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new CancelInventorySwapEvent(), this);
         getServer().getPluginManager().registerEvents(new Quit(), this);
 
+        getCommand("website").setExecutor(new website());
+        getCommand("discord").setExecutor(new discord());
+        getCommand("regeln").setExecutor(new regeln());
+        getCommand("bewerben").setExecutor(new bewerben());
 
 
         //this.loadConfig();
-       // this.loadPlayerData();
+        // this.loadPlayerData();
 
 
         //Config
@@ -170,8 +181,6 @@ public final class Main extends JavaPlugin {
         //String configString = yamlConfiguration.getString(("TestNachricht"));
 
 
-
-
     }
 
     @Override
@@ -181,6 +190,15 @@ public final class Main extends JavaPlugin {
         System.out.println("by TeamStrati");
         System.out.println(" Plugin erfolgreich entladen!");
         log.info(String.format("[%s] Disabled Version %s", getDescription().getName(), getDescription().getVersion()));
+
+        for (Player all : Bukkit.getOnlinePlayers()) {
+            CookieHandler.cfg.set(all.getUniqueId() + ".Cookies", CookieHandler.l.get(all));
+            try {
+                CookieHandler.cfg.save(CookieHandler.file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
 
     }
@@ -211,8 +229,6 @@ public final class Main extends JavaPlugin {
     }
 
 
-
-
     public boolean loadPlayerData() {
         if (!new File(this.getDataFolder() + File.separator + "playerdata.yml").exists()) {
             this.saveDefaultConfig();
@@ -230,7 +246,6 @@ public final class Main extends JavaPlugin {
         }
         return true;
     }
-
 
 
     private boolean setupEconomy() {
@@ -269,7 +284,7 @@ public final class Main extends JavaPlugin {
         Rod_Meta.setDisplayName(ChatColor.GREEN + "Grappling Hook");
         ArrayList<String> Rod_lore = new ArrayList<>();
         Integer PriceGH = yamlConfiguration.getInt("Price.grapplingHook");
-        Rod_lore.add(ChatColor.GOLD + "Kaufe eine Grappling Hook " + ChatColor.GREEN + "("+PriceGH+" Coins)");
+        Rod_lore.add(ChatColor.GOLD + "Kaufe eine Grappling Hook " + ChatColor.GREEN + "(" + PriceGH + " Coins)");
         Rod_Meta.setLore(Rod_lore);
         grapplingHook.setItemMeta(Rod_Meta);
 
@@ -281,7 +296,7 @@ public final class Main extends JavaPlugin {
         heart_Meta.setDisplayName(ChatColor.GREEN + "Heart effect Trail");
         ArrayList<String> heart_lore = new ArrayList<>();
         Integer PriceHeart = yamlConfiguration.getInt("Price.heart");
-        heart_lore.add(ChatColor.GOLD + "Kaufe diesen Trail " + ChatColor.GREEN + "("+PriceHeart+" Coins)");
+        heart_lore.add(ChatColor.GOLD + "Kaufe diesen Trail " + ChatColor.GREEN + "(" + PriceHeart + " Coins)");
         heart_Meta.setLore(heart_lore);
         heart.setItemMeta(heart_Meta);
 
@@ -292,8 +307,8 @@ public final class Main extends JavaPlugin {
         ItemMeta totem_Meta = totem.getItemMeta();
         totem_Meta.setDisplayName(ChatColor.GREEN + "Totem effect Trail");
         ArrayList<String> totem_lore = new ArrayList<>();
-       Integer PriceTotem = yamlConfiguration.getInt("Price.totem");
-        totem_lore.add(ChatColor.GOLD + "Kaufe diesen Trail " + ChatColor.GREEN + "("+PriceTotem+" Coins)");
+        Integer PriceTotem = yamlConfiguration.getInt("Price.totem");
+        totem_lore.add(ChatColor.GOLD + "Kaufe diesen Trail " + ChatColor.GREEN + "(" + PriceTotem + " Coins)");
         totem_Meta.setLore(totem_lore);
         totem.setItemMeta(totem_Meta);
 
@@ -304,7 +319,7 @@ public final class Main extends JavaPlugin {
         Angry_Meta.setDisplayName(ChatColor.GREEN + "Angry Villager Trail");
         ArrayList<String> Angry_lore = new ArrayList<>();
         Integer PriceAngry = yamlConfiguration.getInt("Price.AngryVillager");
-        Angry_lore.add(ChatColor.GOLD + "Kaufe diesen Trail " + ChatColor.GREEN + "("+PriceAngry+" Coins)");
+        Angry_lore.add(ChatColor.GOLD + "Kaufe diesen Trail " + ChatColor.GREEN + "(" + PriceAngry + " Coins)");
         Angry_Meta.setLore(Angry_lore);
         Angry.setItemMeta(Angry_Meta);
 
@@ -315,7 +330,7 @@ public final class Main extends JavaPlugin {
         Emerald_Meta.setDisplayName(ChatColor.GREEN + "Emerald Halo");
         ArrayList<String> Emerald_lore = new ArrayList<>();
         Integer PriceEmerald = yamlConfiguration.getInt("Price.EmeraldHalo");
-        Emerald_lore.add(ChatColor.GOLD + "Kaufe diesen Trail " + ChatColor.GREEN + "("+PriceEmerald+" Coins)");
+        Emerald_lore.add(ChatColor.GOLD + "Kaufe diesen Trail " + ChatColor.GREEN + "(" + PriceEmerald + " Coins)");
         Emerald_Meta.setLore(Emerald_lore);
         Emerald.setItemMeta(Emerald_Meta);
 
@@ -326,7 +341,7 @@ public final class Main extends JavaPlugin {
         Fire_Meta.setDisplayName(ChatColor.GREEN + "Fire Trail");
         ArrayList<String> Fire_lore = new ArrayList<>();
         Integer PriceFire = yamlConfiguration.getInt("Price.fire");
-        Fire_lore.add(ChatColor.GOLD + "Kaufe diesen Trail " + ChatColor.GREEN + "("+PriceFire+" Coins)");
+        Fire_lore.add(ChatColor.GOLD + "Kaufe diesen Trail " + ChatColor.GREEN + "(" + PriceFire + " Coins)");
         Fire_Meta.setLore(Fire_lore);
         Fire.setItemMeta(Fire_Meta);
 
@@ -334,15 +349,14 @@ public final class Main extends JavaPlugin {
 
         ItemStack soul = new ItemStack(Material.SOUL_SAND, 1);
         ItemMeta soul_Meta = soul.getItemMeta();
-        soul_Meta.setDisplayName(ChatColor.GREEN + "soul");
+        soul_Meta.setDisplayName(ChatColor.GREEN + "Soul Trail");
         ArrayList<String> soul_lore = new ArrayList<>();
         Integer Pricesoul = yamlConfiguration.getInt("Price.soul");
-        soul_lore.add(ChatColor.GOLD + "Kaufe diesen Trail " + ChatColor.GREEN + "("+Pricesoul+" Coins)");
+        soul_lore.add(ChatColor.GOLD + "Kaufe diesen Trail " + ChatColor.GREEN + "(" + Pricesoul + " Coins)");
         soul_Meta.setLore(soul_lore);
         soul.setItemMeta(soul_Meta);
 
         ShopMenu.setItem(14, soul);
-
 
 
         //schließen
@@ -421,8 +435,6 @@ public final class Main extends JavaPlugin {
     }
 
 
-
-
     public static Main getInstance() {
         return Main.instance;
     }
@@ -430,8 +442,5 @@ public final class Main extends JavaPlugin {
     public static Config getCfg() {
         return Main.cfg;
     }
-
-
-
-
 }
+

@@ -5,6 +5,7 @@ api-version: 1.16
 authors: [ TeamStrati ]
 description: Lobby System mit einfachen Configurationen
 website: jan-stratmann.de
+depend: [Vault]
 
 commands:
   spenden:
@@ -28,3 +29,19 @@ commands:
   automessage:
     description: Main command for all AutoMessage commands
     aliases: [ automsg, am ]
+
+  website:
+    description: Link to the Website
+    aliases: [webseite, link]
+
+  discord:
+    description: Link to the Discord
+    aliases: [dc]
+
+  regeln:
+    description: rules
+    aliases: [rules]
+
+  bewerben:
+    description: apply
+    aliases: [apply]

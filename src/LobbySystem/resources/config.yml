@@ -5,6 +5,31 @@
 #Set your Prefix:
 Prefix: "&b[&aTeudaria&b] &e"
 
+#Messages
+Discord:
+  Message: 'Unser Community Discord: '
+  Message2: '>>Klicke hier<<'
+  HoverMessage: 'Join gerne'
+  Link: 'https://discord.gg/ZK6DFbJTK6'
+
+Website:
+  Message: 'Unsere Website: '
+  Message2: 'www.teudaria.de'
+  HoverMessage: 'Schau doch mal vorbei!'
+  Link: 'https://www.teudaria.de'
+
+Rules:
+  Message: 'Das sind unsere Regeln: '
+  Message2: '>>Klicke hier<<'
+  HoverMessage: 'Beachte sie!'
+  Link: 'https://teudaria.de/regeln'
+
+Application:
+  Message: 'Willst du die Streamer oder YouTuber Rolle oder m\u00f6chtest dich im Team bewerben? '
+  Message2: '>>Bewirb dich hier<<'
+  HoverMessage: 'Bewirb dich gerne'
+  Link: 'https://teudaria.de/forum/'
+
 #Set how long it takes to use the Grappling Hook a second Time
 Grappling Hook Cooldown: 80
 
@@ -33,6 +58,7 @@ Permissions:
   build: 'LobbySystem.build'
   warps: 'LobbySystem.warps'
   map: 'LobbySystem.map'
+
 
 
 

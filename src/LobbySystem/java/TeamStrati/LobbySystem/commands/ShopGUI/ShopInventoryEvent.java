@@ -5,6 +5,7 @@ import TeamStrati.LobbySystem.commands.ItemManager.ItemManager;
 import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.model.user.User;
 import net.milkbowl.vault.economy.EconomyResponse;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -219,7 +220,7 @@ public class ShopInventoryEvent implements Listener {
                                     if (r.transactionSuccess()) {
 
                                         player.closeInventory();
-                                        player.sendMessage(String.format(prefix + "Du hast für "+ PriceFire+ " Coins den Fire Trail gekauft!"));
+                                        player.sendMessage(String.format(prefix + "Du hast für " + PriceFire + " Coins den Fire Trail gekauft!"));
 
                                         User user = LuckPermsProvider.get().getPlayerAdapter(Player.class).getUser(player);
                                         //Permission für Totem Trail geben
@@ -239,10 +240,13 @@ public class ShopInventoryEvent implements Listener {
                                 player.closeInventory();
                                 player.sendMessage(prefix + "Du besitzt diesen Trail bereits, wenn du geld ausgeben möchtest mach" + ChatColor.DARK_PURPLE + " /spenden");
                             }
+                        }
                             if (e.getCurrentItem().getType() == Material.SOUL_SAND) {
                                 String soulPermission = yamlConfiguration.getString("Permissions.Trails.soul");
+
                                 if (!player.hasPermission(soulPermission)) {
                                     Integer Pricesoul = yamlConfiguration.getInt("Price.soul");
+
                                     if (econ.getBalance(player) >= Pricesoul) {
                                         EconomyResponse r = econ.withdrawPlayer(player, Pricesoul);
                                         if (r.transactionSuccess()) {
@@ -269,7 +273,7 @@ public class ShopInventoryEvent implements Listener {
                                     player.sendMessage(prefix + "Du besitzt diesen Trail bereits, wenn du geld ausgeben möchtest mach" + ChatColor.DARK_PURPLE + " /spenden");
                                 }
                             }
-                        }
+
                     }catch (NullPointerException ex){}
                 }
             } else {

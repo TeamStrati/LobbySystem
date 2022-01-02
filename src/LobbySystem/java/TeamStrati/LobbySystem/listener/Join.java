@@ -27,7 +27,7 @@ public class Join implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
-
+        e.getPlayer().setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
         Player p = e.getPlayer();
         UUID = p.getUniqueId().toString();
         p.getInventory().clear();
