@@ -34,4 +34,5 @@
 - [ ] More Effects
 - [ ] More Tools
 - [ ] Fixing the Startup Bug
+- [ ] Permissions and Navigator in Config
 
