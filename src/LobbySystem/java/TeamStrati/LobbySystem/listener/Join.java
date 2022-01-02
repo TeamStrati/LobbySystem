@@ -60,7 +60,7 @@ public class Join implements Listener {
             for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
                 onlinePlayer.hidePlayer((Plugin)Main.getInstance(), onlinePlayer);
             }
-            e.getPlayer().getInventory().setItem(6, Hide);
+            e.getPlayer().getInventory().setItem(5, Hide);
         }
         else {
             ItemStack Hide = new ItemStack(Material.LIME_DYE);

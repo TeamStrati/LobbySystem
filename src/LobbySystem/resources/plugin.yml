@@ -24,3 +24,7 @@ commands:
 
   map:
     description: Map
+
+  automessage:
+    description: Main command for all AutoMessage commands
+    aliases: [ automsg, am ]

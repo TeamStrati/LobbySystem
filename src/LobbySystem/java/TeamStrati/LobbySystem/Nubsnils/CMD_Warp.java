@@ -37,28 +37,27 @@ public class CMD_Warp implements CommandExecutor, TabCompleter {
             }
         }
         else if (args.length == 2) {
-            String WarpsPermission = yamlConfiguration.getString("Permssions.warps");
-            if (!p.hasPermission(WarpsPermission)) {
+            String WarpsPermission = yamlConfiguration.getString("Permissions.warps");
+            if (p.hasPermission(WarpsPermission)){
+                if (args[0].equalsIgnoreCase("add") || args[0].equalsIgnoreCase("set")) {
+                    if (WarpManager.getWarp(args[1]) == null) {
+                        WarpManager.createWarp(args[1], p.getLocation());
+                        p.sendMessage(Main.prefix + "§6Du hast den Warp §d" + args[1] + "§6 erstellt");
+                    } else {
+                        p.sendMessage(Main.prefix + "§cDieser Warp existiert bereits!");
+                    }
+                } else if (args[0].equalsIgnoreCase("remove") || args[0].equalsIgnoreCase("delete")) {
+                    if (WarpManager.getWarp(args[1]) != null) {
+                        WarpManager.deleteWarp(args[1]);
+                        p.sendMessage(Main.prefix + "§6Du hast den Warp §d" + args[1] + "§6 gel\u00f6scht");
+                    } else {
+                        p.sendMessage(Main.prefix + "§cDieser Warp existiert nicht!");
+                    }
+                }
+
+
+            } else {
                 p.sendMessage(Main.prefix + "§cDu hast dazu keine Rechte!");
-                return false;
-            }
-            if (args[0].equalsIgnoreCase("add") || args[0].equalsIgnoreCase("set")) {
-                if (WarpManager.getWarp(args[1]) == null) {
-                    WarpManager.createWarp(args[1], p.getLocation());
-                    p.sendMessage(Main.prefix+ "§6Du hast den Warp §d" + args[1] + "§6 erstellt");
-                }
-                else {
-                    p.sendMessage(Main.prefix + "§cDieser Warp existiert bereits!");
-                }
-            }
-            else if (args[0].equalsIgnoreCase("remove") || args[0].equalsIgnoreCase("delete")) {
-                if (WarpManager.getWarp(args[1]) != null) {
-                    WarpManager.deleteWarp(args[1]);
-                    p.sendMessage(Main.prefix + "§6Du hast den Warp §d" + args[1] + "§6 gel\u00f6scht");
-                }
-                else {
-                    p.sendMessage(Main.prefix+ "§cDieser Warp existiert nicht!");
-                }
             }
         }
         return false;

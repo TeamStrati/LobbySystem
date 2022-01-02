@@ -35,7 +35,7 @@ public class PlayerHider implements Listener {
                 final ItemMeta HideMeta = Hide.getItemMeta();
                 HideMeta.setDisplayName("§a§lSpieler sichtbar");
                 Hide.setItemMeta(HideMeta);
-                e.getPlayer().getInventory().setItem(6, Hide);
+                e.getPlayer().getInventory().setItem(5, Hide);
                 e.getPlayer().updateInventory();
                 e.getPlayer().sendMessage(Main.prefix + "§aDu kannst nun wieder §2alle Spieler §asehen!");
                 p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, 0.1f, 0.5f);
@@ -49,7 +49,7 @@ public class PlayerHider implements Listener {
                 final ItemMeta HideMeta = Hide.getItemMeta();
                 HideMeta.setDisplayName("§7§lSpieler versteckt");
                 Hide.setItemMeta(HideMeta);
-                e.getPlayer().getInventory().setItem(6, Hide);
+                e.getPlayer().getInventory().setItem(5, Hide);
                 e.getPlayer().updateInventory();
                 e.getPlayer().sendMessage(Main.prefix + "§aDu siehst nun §ckeine Spieler §amehr!");
                 p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, 0.1f, 0.5f);

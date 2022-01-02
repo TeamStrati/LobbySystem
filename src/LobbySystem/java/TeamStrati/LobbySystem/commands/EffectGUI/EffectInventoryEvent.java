@@ -82,6 +82,41 @@ public class EffectInventoryEvent implements Listener {
                                 player.sendMessage(prefix + "Du hast diesen Trail noch nicht freigeschlaten. Kaufe ihn mit /shop");
                                 break;
                             }
+                        case 12:
+                            String AngryVillagerPermission = yamlConfiguration.getString("Permissions.Trails.AngryVillager");
+                            if (player.hasPermission(AngryVillagerPermission)) {
+                                trails.AngryHead();
+                                player.closeInventory();
+                                player.updateInventory();
+                                break;
+                            }else {
+                                player.sendMessage(prefix + "Du hast diesen Trail noch nicht freigeschlaten. Kaufe ihn mit /shop");
+                                break;
+                            }
+                        case 13:
+                            String EmeraldHaloPermission = yamlConfiguration.getString("Permissions.Trails.EmeraldHalo");
+                            if (player.hasPermission(EmeraldHaloPermission)) {
+                            trails.EmeraldHalo();
+                            player.closeInventory();
+                            player.updateInventory();
+                            break;
+
+                        }else {
+                                player.sendMessage(prefix + "Du hast diesen Trail noch nicht freigeschlaten. Kaufe ihn mit /shop");
+                                break;
+                            }
+                        case 14:
+                            String FirePermission = yamlConfiguration.getString("Permissions.Trails.fire");
+                            if (player.hasPermission(FirePermission)) {
+                                trails.FeueruntermHintern();
+                                player.closeInventory();
+                                player.updateInventory();
+                                break;
+
+                            }else {
+                                player.sendMessage(prefix + "Du hast diesen Trail noch nicht freigeschlaten. Kaufe ihn mit /shop");
+                               break;
+                            }
                         default:
                             break;
                     }

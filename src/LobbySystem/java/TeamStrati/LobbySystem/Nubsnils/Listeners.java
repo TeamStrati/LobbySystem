@@ -41,18 +41,24 @@ public class Listeners implements Listener {
     @EventHandler
     public void onPickup(final PlayerPickupItemEvent e) {
         final Player p = e.getPlayer();
-        e.setCancelled(true);
+        if (!CMD_Build.build.contains(p)) {
+            e.setCancelled(true);
+        }
     }
 
     @EventHandler
     public void onDrop(final PlayerDropItemEvent e) {
         final Player p = e.getPlayer();
-        e.setCancelled(true);
+        if (!CMD_Build.build.contains(p)) {
+            e.setCancelled(true);
+        }
     }
 
     @EventHandler
     public void onFood(final FoodLevelChangeEvent e) {
-        e.setCancelled(true);
+
+            e.setCancelled(true);
+
     }
 
     @EventHandler

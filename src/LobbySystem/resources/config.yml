@@ -10,17 +10,28 @@ Grappling Hook Cooldown: 80
 
 #Set how much the things in the Shop costs
 Price:
+  #Cosmetics
   heart: 0
   totem: 0
+  EmeraldHalo: 0
+  AngryHead: 0
+  fire: 0
+
+  #Items
   grapplingHook: 0
 
+#Permissions
 Permissions:
   Trails:
     heart: 'LobbySystem.Trails.heart'
     totem: 'LobbySystem.Trails.totem'
+    EmeraldHalo: 'LobbySystem.Trails.EmeraldHalo'
+    AngryVillager: 'LobbySystem.Trails.AngryVillager'
+    fire: 'LobbySystem.Trails.fire'
   build: 'LobbySystem.build'
   warps: 'LobbySystem.warps'
   map: 'LobbySystem.map'
+
 
 
 ####################################

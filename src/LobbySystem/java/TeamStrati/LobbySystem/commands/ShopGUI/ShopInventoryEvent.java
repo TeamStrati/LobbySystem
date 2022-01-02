@@ -150,6 +150,96 @@ public class ShopInventoryEvent implements Listener {
                                 player.sendMessage(prefix + "Du besitzt diesen Trail bereits, wenn du geld ausgeben möchtest mach" + ChatColor.DARK_PURPLE + " /spenden");
                             }
                         }
+                        if (e.getCurrentItem().getType() == Material.EMERALD) {
+                            String EmeraldHaloPermission = yamlConfiguration.getString("Permissions.Trails.EmeraldHalo");
+                            if (!player.hasPermission(EmeraldHaloPermission)) {
+                                Integer PriceTotem = yamlConfiguration.getInt("Price.EmeraldHalo");
+                                if (econ.getBalance(player) >= PriceTotem) {
+                                    EconomyResponse r = econ.withdrawPlayer(player, PriceTotem);
+                                    if (r.transactionSuccess()) {
+
+                                        player.closeInventory();
+                                        player.sendMessage(String.format(prefix + "Du hast für "+ PriceTotem+ " Coins den Emerald Halo gekauft!"));
+
+                                        User user = LuckPermsProvider.get().getPlayerAdapter(Player.class).getUser(player);
+                                        //Permission für Totem Trail geben
+                                        plugin.addPermission(user, EmeraldHaloPermission);
+
+
+                                    } else {
+                                        player.sendMessage(String.format(prefix + "An error occured: %s", r.errorMessage));
+                                    }
+                                } else {
+                                    player.sendMessage(String.format(prefix + "Du hast leider nicht genug geld"));
+                                    player.closeInventory();
+                                }
+
+
+                            } else {
+                                player.closeInventory();
+                                player.sendMessage(prefix + "Du besitzt diesen Halo bereits, wenn du geld ausgeben möchtest mach" + ChatColor.DARK_PURPLE + " /spenden");
+                            }
+                        }
+                        if (e.getCurrentItem().getType() == Material.FIRE_CHARGE) {
+                            String EmeraldHaloPermission = yamlConfiguration.getString("Permissions.Trails.AngryVillager");
+                            if (!player.hasPermission(EmeraldHaloPermission)) {
+                                Integer PriceTotem = yamlConfiguration.getInt("Price.AngryVillager");
+                                if (econ.getBalance(player) >= PriceTotem) {
+                                    EconomyResponse r = econ.withdrawPlayer(player, PriceTotem);
+                                    if (r.transactionSuccess()) {
+
+                                        player.closeInventory();
+                                        player.sendMessage(String.format(prefix + "Du hast für "+ PriceTotem+ " Coins den Angry Villager Trail gekauft!"));
+
+                                        User user = LuckPermsProvider.get().getPlayerAdapter(Player.class).getUser(player);
+                                        //Permission für Totem Trail geben
+                                        plugin.addPermission(user, EmeraldHaloPermission);
+
+
+                                    } else {
+                                        player.sendMessage(String.format(prefix + "An error occured: %s", r.errorMessage));
+                                    }
+                                } else {
+                                    player.sendMessage(String.format(prefix + "Du hast leider nicht genug geld"));
+                                    player.closeInventory();
+                                }
+
+
+                            } else {
+                                player.closeInventory();
+                                player.sendMessage(prefix + "Du besitzt diesen Trail bereits, wenn du geld ausgeben möchtest mach" + ChatColor.DARK_PURPLE + " /spenden");
+                            }
+                        }
+                        if (e.getCurrentItem().getType() == Material.CAMPFIRE) {
+                            String FirePermission = yamlConfiguration.getString("Permissions.Trails.fire");
+                            if (!player.hasPermission(FirePermission)) {
+                                Integer PriceFire = yamlConfiguration.getInt("Price.fire");
+                                if (econ.getBalance(player) >= PriceFire) {
+                                    EconomyResponse r = econ.withdrawPlayer(player, PriceFire);
+                                    if (r.transactionSuccess()) {
+
+                                        player.closeInventory();
+                                        player.sendMessage(String.format(prefix + "Du hast für "+ PriceFire+ " Coins den Fire Trail gekauft!"));
+
+                                        User user = LuckPermsProvider.get().getPlayerAdapter(Player.class).getUser(player);
+                                        //Permission für Totem Trail geben
+                                        plugin.addPermission(user, FirePermission);
+
+
+                                    } else {
+                                        player.sendMessage(String.format(prefix + "An error occured: %s", r.errorMessage));
+                                    }
+                                } else {
+                                    player.sendMessage(String.format(prefix + "Du hast leider nicht genug geld"));
+                                    player.closeInventory();
+                                }
+
+
+                            } else {
+                                player.closeInventory();
+                                player.sendMessage(prefix + "Du besitzt diesen Trail bereits, wenn du geld ausgeben möchtest mach" + ChatColor.DARK_PURPLE + " /spenden");
+                            }
+                        }
                     }catch (NullPointerException ex){}
                 }
             } else {

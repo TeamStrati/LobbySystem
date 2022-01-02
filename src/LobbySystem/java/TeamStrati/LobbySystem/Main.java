@@ -24,12 +24,16 @@ import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -38,8 +42,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 
-import java.util.ArrayList;
-import java.util.UUID;
+import java.util.*;
 import java.util.logging.Logger;
 
 
@@ -58,11 +61,12 @@ public final class Main extends JavaPlugin {
     //public static String prefix = ChatColor.AQUA + "[" + ChatColor.GREEN + "Teudaria" + ChatColor.AQUA + "]" + ChatColor.YELLOW + " ";
 
 
+
     public static String prefixConfig = "&b[&aTeudaria&b] &e";
     public static String prefix;
     //public static String prefixConfig = yamlConfiguration.getString("Prefix");
     //public static String prefix = ChatColor.translateAlternateColorCodes('&', prefixConfig);
-    private static Main instance;
+    public static Main instance;
 
 
     public static ArrayList<UUID> noplayersvisible;
@@ -107,6 +111,8 @@ public final class Main extends JavaPlugin {
         this.getCommand("warp").setExecutor((CommandExecutor)new CMD_Warp());
         this.getCommand("build").setExecutor((CommandExecutor)new CMD_Build());
         Bukkit.getPluginManager().registerEvents((Listener)new Listeners(), (Plugin)this);
+
+
 
         Bukkit.getPluginManager().registerEvents((Listener)new Navigator(), (Plugin)this);
         Bukkit.getPluginManager().registerEvents((Listener)new PlayerHider(), (Plugin)this);
@@ -175,6 +181,8 @@ public final class Main extends JavaPlugin {
         System.out.println("by TeamStrati");
         System.out.println(" Plugin erfolgreich entladen!");
         log.info(String.format("[%s] Disabled Version %s", getDescription().getName(), getDescription().getVersion()));
+
+
     }
 
     public boolean loadConfig() {
@@ -201,6 +209,10 @@ public final class Main extends JavaPlugin {
 
         return true;
     }
+
+
+
+
     public boolean loadPlayerData() {
         if (!new File(this.getDataFolder() + File.separator + "playerdata.yml").exists()) {
             this.saveDefaultConfig();
@@ -287,6 +299,41 @@ public final class Main extends JavaPlugin {
 
         ShopMenu.setItem(10, totem);
 
+        ItemStack Angry = new ItemStack(Material.FIRE_CHARGE, 1);
+        ItemMeta Angry_Meta = Angry.getItemMeta();
+        Angry_Meta.setDisplayName(ChatColor.GREEN + "Angry Villager Trail");
+        ArrayList<String> Angry_lore = new ArrayList<>();
+        Integer PriceAngry = yamlConfiguration.getInt("Price.AngryVillager");
+        Angry_lore.add(ChatColor.GOLD + "Kaufe diesen Trail " + ChatColor.GREEN + "("+PriceAngry+" Coins)");
+        Angry_Meta.setLore(Angry_lore);
+        Angry.setItemMeta(Angry_Meta);
+
+        ShopMenu.setItem(11, Angry);
+
+        ItemStack Emerald = new ItemStack(Material.EMERALD, 1);
+        ItemMeta Emerald_Meta = Emerald.getItemMeta();
+        Emerald_Meta.setDisplayName(ChatColor.GREEN + "Emerald Halo");
+        ArrayList<String> Emerald_lore = new ArrayList<>();
+        Integer PriceEmerald = yamlConfiguration.getInt("Price.EmeraldHalo");
+        Emerald_lore.add(ChatColor.GOLD + "Kaufe diesen Trail " + ChatColor.GREEN + "("+PriceEmerald+" Coins)");
+        Emerald_Meta.setLore(Emerald_lore);
+        Emerald.setItemMeta(Emerald_Meta);
+
+        ShopMenu.setItem(12, Emerald);
+
+        ItemStack Fire = new ItemStack(Material.CAMPFIRE, 1);
+        ItemMeta Fire_Meta = Fire.getItemMeta();
+        Fire_Meta.setDisplayName(ChatColor.GREEN + "Fire Trail");
+        ArrayList<String> Fire_lore = new ArrayList<>();
+        Integer PriceFire = yamlConfiguration.getInt("Price.fire");
+        Fire_lore.add(ChatColor.GOLD + "Kaufe diesen Trail " + ChatColor.GREEN + "("+PriceFire+" Coins)");
+        Fire_Meta.setLore(Fire_lore);
+        Fire.setItemMeta(Fire_Meta);
+
+        ShopMenu.setItem(13, Fire);
+
+
+
         //schließen
         ItemStack barrier = new ItemStack(Material.BARRIER, 1);
         ItemMeta test_meta = barrier.getItemMeta();
@@ -315,6 +362,24 @@ public final class Main extends JavaPlugin {
         meta.setDisplayName(ChatColor.RED + "Heart Trail");
         item.setItemMeta(meta);
         EffectMenu.setItem(5, item);
+
+        item = new ItemStack(Material.FIRE_CHARGE);
+        meta = item.getItemMeta();
+        meta.setDisplayName(ChatColor.GRAY + "Angry Head");
+        item.setItemMeta(meta);
+        EffectMenu.setItem(12, item);
+
+        item = new ItemStack(Material.EMERALD);
+        meta = item.getItemMeta();
+        meta.setDisplayName(ChatColor.GREEN + "Emerald Halo");
+        item.setItemMeta(meta);
+        EffectMenu.setItem(13, item);
+
+        item = new ItemStack(Material.CAMPFIRE);
+        meta = item.getItemMeta();
+        meta.setDisplayName(ChatColor.GREEN + "Fire Trail");
+        item.setItemMeta(meta);
+        EffectMenu.setItem(14, item);
 
 
         //schließen
@@ -348,5 +413,8 @@ public final class Main extends JavaPlugin {
     public static Config getCfg() {
         return Main.cfg;
     }
+
+
+
 
 }

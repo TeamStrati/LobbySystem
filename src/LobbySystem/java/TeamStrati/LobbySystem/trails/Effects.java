@@ -58,5 +58,66 @@ public class Effects {
 
         }, 0, 1);
     }
+    public void AngryHead(){
+        taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(Main.class), new Runnable() {
+
+            double var = 0;
+            Location loc, first, second;
+            ParticleData particle = new ParticleData(player.getUniqueId());
+
+            @Override
+            public void run(){
+                if (!particle.hasID()) {
+                    particle.setID(taskID);
+                }
+
+                player.getWorld().spawnParticle(Particle.VILLAGER_ANGRY, player.getLocation().add(0,1.60,0), 1);
+            }
+
+        },0,1);
+    }
+    public void EmeraldHalo(){
+        taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(Main.class), new Runnable() {
+
+            double var = 0;
+            Location loc, first, second;
+            ParticleData particle = new ParticleData(player.getUniqueId());
+
+            @Override
+            public void run(){
+                if (!particle.hasID()) {
+                    particle.setID(taskID);
+                }
+
+                var += Math.PI / 20;
+
+                loc = player.getLocation();
+                first = loc.clone().add(Math.cos(var), 2, Math.sin(var));
+
+
+                player.getWorld().spawnParticle(Particle.VILLAGER_HAPPY, first, 0);
+
+            }
+
+        },0,1);
+    }
+    public void FeueruntermHintern(){
+        taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(Main.class), new Runnable() {
+
+            double var = 0;
+            Location loc, first, second;
+            ParticleData particle = new ParticleData(player.getUniqueId());
+
+            @Override
+            public void run(){
+                if (!particle.hasID()) {
+                    particle.setID(taskID);
+                }
+
+                player.getWorld().spawnParticle(Particle.LAVA, player.getLocation().add(0,0.70,0), 1);
+            }
+
+        },0,1);
+    }
 
 }
