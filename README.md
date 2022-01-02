@@ -34,4 +34,5 @@
 - [ ] More Effects
 - [ ] More Tools
 - [ ] Fixing the Startup Bug
+- [x] Permissions in Config
 
