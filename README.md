@@ -12,6 +12,7 @@
   Walk around with Style
 - Easy Spawn system:
   Only do ```/warp add spawn```
+- ```/map <link>``` to get a map with a picture
 
 ![Config](/Pictures/config.png)
 - Set the Prefix

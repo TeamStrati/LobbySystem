@@ -20,6 +20,7 @@ Permissions:
     totem: 'LobbySystem.Trails.totem'
   build: 'LobbySystem.build'
   warps: 'LobbySystem.warps'
+  map: 'LobbySystem.map'
 
 
 ####################################

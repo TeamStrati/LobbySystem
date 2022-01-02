@@ -22,3 +22,5 @@ commands:
   build:
     description: Build
 
+  map:
+    description: Map

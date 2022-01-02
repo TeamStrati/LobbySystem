@@ -34,7 +34,6 @@ public class Join implements Listener {
 
         if (PlayerDataList.contains("Orders.GrapplingHook." + UUID)){
             p.getInventory().addItem(ItemManager.GrapplingHook);
-
         }
         p.getInventory().setItem(8, ItemManager.EffectChest);
 

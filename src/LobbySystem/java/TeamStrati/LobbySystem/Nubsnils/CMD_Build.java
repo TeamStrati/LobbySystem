@@ -16,8 +16,7 @@ import org.bukkit.plugin.Plugin;
 
 import java.io.File;
 import java.util.ArrayList;
-
-import static com.google.gson.internal.bind.TypeAdapters.UUID;
+import java.util.UUID;
 
 
 public class CMD_Build implements CommandExecutor {
@@ -39,11 +38,15 @@ public class CMD_Build implements CommandExecutor {
                     CMD_Build.build.remove(p);
                     p.setGameMode(GameMode.SURVIVAL);
                     p.getInventory().clear();
+                    UUID uuid = ((Player) sender).getUniqueId();
+                    if (PlayerDataList.contains("Orders.GrapplingHook." + uuid)){
+                        p.getInventory().addItem(ItemManager.GrapplingHook);
+                    }
                     final ItemStack Navi = new ItemStack(Material.COMPASS);
                     final ItemMeta NaviMeta = Navi.getItemMeta();
                     NaviMeta.setDisplayName("§c§lNavigator");
                     Navi.setItemMeta(NaviMeta);
-                    p.getInventory().setItem(4, Navi);
+                    p.getInventory().setItem(3, Navi);
                     if (Main.noplayersvisible.contains(p.getUniqueId())) {
                         final ItemStack Hide = new ItemStack(Material.GRAY_DYE);
                         final ItemMeta HideMeta = Hide.getItemMeta();
@@ -52,19 +55,16 @@ public class CMD_Build implements CommandExecutor {
                         for (final Player onlinePlayer : Bukkit.getOnlinePlayers()) {
                             onlinePlayer.hidePlayer((Plugin)Main.getInstance(), onlinePlayer);
                         }
-                        p.getInventory().setItem(6, Hide);
+                        p.getInventory().setItem(5, Hide);
                     }
                     else {
                         final ItemStack Hide = new ItemStack(Material.LIME_DYE);
                         final ItemMeta HideMeta = Hide.getItemMeta();
                         HideMeta.setDisplayName("§a§lSpieler sichtbar");
                         Hide.setItemMeta(HideMeta);
-                        p.getInventory().setItem(6, Hide);
+                        p.getInventory().setItem(5, Hide);
                     }
-                    if (PlayerDataList.contains("Orders.GrapplingHook." + UUID)){
-                        p.getInventory().setItem(0, ItemManager.GrapplingHook);
 
-                    }
                     p.getInventory().setItem(8, ItemManager.EffectChest);
                     p.sendMessage(Main.prefix + "§aDu hast den §6Build §amode §c§ldeaktivert.");
                 }

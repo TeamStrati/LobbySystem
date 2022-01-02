@@ -11,6 +11,8 @@ import TeamStrati.LobbySystem.commands.spenden;
 
 import TeamStrati.LobbySystem.listener.CancelInventorySwapEvent;
 import TeamStrati.LobbySystem.listener.Join;
+import TeamStrati.LobbySystem.map.ImageCommand;
+import TeamStrati.LobbySystem.map.ImageManager;
 import TeamStrati.LobbySystem.trails.Quit;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
@@ -55,6 +57,7 @@ public final class Main extends JavaPlugin {
 
     //public static String prefix = ChatColor.AQUA + "[" + ChatColor.GREEN + "Teudaria" + ChatColor.AQUA + "]" + ChatColor.YELLOW + " ";
 
+
     public static String prefixConfig = "&b[&aTeudaria&b] &e";
     public static String prefix;
     //public static String prefixConfig = yamlConfiguration.getString("Prefix");
@@ -84,6 +87,11 @@ public final class Main extends JavaPlugin {
             Bukkit.getPluginManager().disablePlugin((Plugin) this);
             //return false;
         }
+
+        ImageManager manager = ImageManager.getInstance();
+        manager.init();
+        this.getCommand("map").setExecutor(new ImageCommand());
+
 
         Main.noplayersvisible = new ArrayList<UUID>();
 
