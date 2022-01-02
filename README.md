@@ -13,7 +13,7 @@
 - Easy Spawn system:
   Only do ```/warp add spawn```
 
-### **Config.yml:**
+![Config](/Pictures/config.png)
 - Set the Prefix
 - Changes the Time of the Grappling Hook Cooldown
 - Changes the Prices of the Shop
