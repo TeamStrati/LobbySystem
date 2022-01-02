@@ -1,4 +1,4 @@
-![Banner](/Pictures/Lobby_System.png)
+# Lobby System
 ![Features](/Pictures/features.png)
 - ```/shop```:
   Lobby Shop with Items and Effects
