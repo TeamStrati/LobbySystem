@@ -1,8 +1,6 @@
-# __Lobby System__
-## by TeamStrati and NubsNils
 
 ![Banner](/Pictures/Lobby_System.png)
-
+## by TeamStrati and NubsNils
 ### **Features:**
 - ```/shop```:
   Lobby Shop with Items and Effects
