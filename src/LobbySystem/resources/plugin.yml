@@ -1,0 +1,23 @@
+name: LobbySystem
+version: '${project.version}'
+main: TeamStrati.LobbySystem.Main
+api-version: 1.16
+authors: [ TeamStrati ]
+description: Lobby System mit einfachen Configurationen
+website: jan-stratmann.de
+
+commands:
+  spenden:
+    description: spende 10 Coins an den Server
+
+  shop:
+    description: Lobby Shop
+
+  effects:
+    description: Öffnet das Effekte Menu
+
+  warp:
+    description: Warp
+
+  build:
+    description: Build

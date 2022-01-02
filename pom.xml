@@ -48,7 +48,7 @@
         </plugins>
         <resources>
             <resource>
-                <directory>src/LobbyShop/resources</directory>
+                <directory>src/LobbySystem/resources</directory>
                 <filtering>true</filtering>
             </resource>
         </resources>

@@ -1,0 +1,27 @@
+####################################
+#      L O B B Y  S Y S T E M      #
+####################################
+
+#Set your Prefix:
+Prefix: "&b[&aTeudaria&b] &e"
+
+#Set how long it takes to use the Grappling Hook a second Time
+Grappling Hook Cooldown: 80
+
+#Set how much the things in the Shop costs
+Price:
+  heart: 0
+  totem: 0
+  grapplingHook: 0
+
+Permissions:
+  Trails:
+    heart: 'LobbySystem.Trails.heart'
+    totem: 'LobbySystem.Trails.totem'
+  build: 'LobbySystem.build'
+  warps: 'LobbySystem.warps'
+
+
+####################################
+#Plugin by TeamStrati and NupsNils #
+####################################
