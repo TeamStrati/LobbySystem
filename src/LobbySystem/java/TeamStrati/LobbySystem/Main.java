@@ -323,7 +323,7 @@ public final class Main extends JavaPlugin {
 
         ItemStack Fire = new ItemStack(Material.CAMPFIRE, 1);
         ItemMeta Fire_Meta = Fire.getItemMeta();
-        Fire_Meta.setDisplayName(ChatColor.GREEN + "Fire Trail");
+        Fire_Meta.setDisplayName(ChatColor.DARK_RED + "Fire Trail");
         ArrayList<String> Fire_lore = new ArrayList<>();
         Integer PriceFire = yamlConfiguration.getInt("Price.fire");
         Fire_lore.add(ChatColor.GOLD + "Kaufe diesen Trail " + ChatColor.GREEN + "("+PriceFire+" Coins)");
@@ -355,31 +355,31 @@ public final class Main extends JavaPlugin {
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(ChatColor.YELLOW + "Totem Trail");
         item.setItemMeta(meta);
-        EffectMenu.setItem(3, item);
+        EffectMenu.setItem(0, item);
 
         item = new ItemStack(Material.POPPY);
         meta = item.getItemMeta();
         meta.setDisplayName(ChatColor.RED + "Heart Trail");
         item.setItemMeta(meta);
-        EffectMenu.setItem(5, item);
+        EffectMenu.setItem(2, item);
 
         item = new ItemStack(Material.FIRE_CHARGE);
         meta = item.getItemMeta();
         meta.setDisplayName(ChatColor.GRAY + "Angry Head");
         item.setItemMeta(meta);
-        EffectMenu.setItem(12, item);
+        EffectMenu.setItem(4, item);
 
         item = new ItemStack(Material.EMERALD);
         meta = item.getItemMeta();
         meta.setDisplayName(ChatColor.GREEN + "Emerald Halo");
         item.setItemMeta(meta);
-        EffectMenu.setItem(13, item);
+        EffectMenu.setItem(6, item);
 
         item = new ItemStack(Material.CAMPFIRE);
         meta = item.getItemMeta();
         meta.setDisplayName(ChatColor.GREEN + "Fire Trail");
         item.setItemMeta(meta);
-        EffectMenu.setItem(14, item);
+        EffectMenu.setItem(8, item);
 
 
         //schließen

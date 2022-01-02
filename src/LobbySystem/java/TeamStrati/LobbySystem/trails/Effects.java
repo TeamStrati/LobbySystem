@@ -89,7 +89,7 @@ public class Effects {
                     particle.setID(taskID);
                 }
 
-                var += Math.PI / 20;
+                var += Math.PI / 16;
 
                 loc = player.getLocation();
                 first = loc.clone().add(Math.cos(var), 2, Math.sin(var));

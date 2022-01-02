@@ -59,7 +59,7 @@ public class EffectInventoryEvent implements Listener {
                     Effects trails = new Effects(player);
 
                     switch (e.getSlot()) {
-                        case 3:
+                        case 0:
                             String TotemPermission = yamlConfiguration.getString("Permissions.Trails.totem");
                             if (player.hasPermission(TotemPermission)) {
                                 trails.startTotem();
@@ -71,7 +71,7 @@ public class EffectInventoryEvent implements Listener {
                                 player.sendMessage(prefix + "Du hast diesen Trail noch nicht freigeschlaten. Kaufe ihn mit /shop");
                                 break;
                             }
-                        case 5:
+                        case 2:
                             String HeartPermission = yamlConfiguration.getString("Permissions.Trails.heart");
                             if (player.hasPermission(HeartPermission)) {
                                 trails.heartTrail();
@@ -82,7 +82,7 @@ public class EffectInventoryEvent implements Listener {
                                 player.sendMessage(prefix + "Du hast diesen Trail noch nicht freigeschlaten. Kaufe ihn mit /shop");
                                 break;
                             }
-                        case 12:
+                        case 4:
                             String AngryVillagerPermission = yamlConfiguration.getString("Permissions.Trails.AngryVillager");
                             if (player.hasPermission(AngryVillagerPermission)) {
                                 trails.AngryHead();
@@ -93,7 +93,7 @@ public class EffectInventoryEvent implements Listener {
                                 player.sendMessage(prefix + "Du hast diesen Trail noch nicht freigeschlaten. Kaufe ihn mit /shop");
                                 break;
                             }
-                        case 13:
+                        case 6:
                             String EmeraldHaloPermission = yamlConfiguration.getString("Permissions.Trails.EmeraldHalo");
                             if (player.hasPermission(EmeraldHaloPermission)) {
                             trails.EmeraldHalo();
@@ -105,7 +105,7 @@ public class EffectInventoryEvent implements Listener {
                                 player.sendMessage(prefix + "Du hast diesen Trail noch nicht freigeschlaten. Kaufe ihn mit /shop");
                                 break;
                             }
-                        case 14:
+                        case 8:
                             String FirePermission = yamlConfiguration.getString("Permissions.Trails.fire");
                             if (player.hasPermission(FirePermission)) {
                                 trails.FeueruntermHintern();
