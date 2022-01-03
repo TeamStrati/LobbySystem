@@ -13,6 +13,10 @@
 - Easy Spawn system:
   Only do ```/warp add spawn```
 - ```/map <link>``` to get a map with a picture
+- CookieClicker: 
+  - Special Texture Pack (Can be toggled in the config.yml)
+  - ```/setcookieclicker```or place an Gold Block
+  
 
 ![Config](/Pictures/config.png)
 - Set the Prefix
