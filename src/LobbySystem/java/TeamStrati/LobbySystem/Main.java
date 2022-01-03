@@ -1,6 +1,7 @@
 package TeamStrati.LobbySystem;
 
 import TeamStrati.LobbySystem.CookieClicker.CookieHandler;
+import TeamStrati.LobbySystem.CookieClicker.setCookieClicker;
 import TeamStrati.LobbySystem.Nubsnils.*;
 import TeamStrati.LobbySystem.commands.EffectGUI.EffectGUI;
 import TeamStrati.LobbySystem.commands.EffectGUI.EffectInventoryEvent;
@@ -121,6 +122,7 @@ public final class Main extends JavaPlugin {
         prefix = ChatColor.translateAlternateColorCodes('&', prefixConfig);
         this.getCommand("warp").setExecutor((CommandExecutor) new CMD_Warp());
         this.getCommand("build").setExecutor((CommandExecutor) new CMD_Build());
+        this.getCommand("setcookieclicker").setExecutor(new setCookieClicker());
         Bukkit.getPluginManager().registerEvents((Listener) new Listeners(), (Plugin) this);
 
 
@@ -154,7 +156,7 @@ public final class Main extends JavaPlugin {
 
         getCommand("effects").setExecutor(new EffectGUI(this));
         getServer().getPluginManager().registerEvents(new EffectInventoryEvent(this), this);
-        getServer().getPluginManager().registerEvents(new CancelInventorySwapEvent(), this);
+        getServer().getPluginManager().registerEvents(new CancelInventorySwapEvent(),this);
         getServer().getPluginManager().registerEvents(new Quit(), this);
 
         getCommand("website").setExecutor(new website());
@@ -194,7 +196,7 @@ public final class Main extends JavaPlugin {
         for (Player all : Bukkit.getOnlinePlayers()) {
             CookieHandler.cfg.set(all.getUniqueId() + ".Cookies", CookieHandler.l.get(all));
             try {
-                CookieHandler.cfg.save(CookieHandler.file);
+                CookieHandler.cfg.save(CookieHandler.cookies);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -358,6 +360,17 @@ public final class Main extends JavaPlugin {
 
         ShopMenu.setItem(14, soul);
 
+        ItemStack portal = new ItemStack(Material.OBSIDIAN, 1);
+        ItemMeta portal_Meta = portal.getItemMeta();
+        portal_Meta.setDisplayName(ChatColor.DARK_PURPLE + "Portal Trail");
+        ArrayList<String> portal_lore = new ArrayList<>();
+        Integer Priceportal = yamlConfiguration.getInt("Price.portal");
+        portal_lore.add(ChatColor.GOLD + "Kaufe diesen Trail " + ChatColor.GREEN + "(" + Priceportal + " Coins)");
+        portal_Meta.setLore(portal_lore);
+        portal.setItemMeta(portal_Meta);
+
+        ShopMenu.setItem(15, portal);
+
 
         //schließen
         ItemStack barrier = new ItemStack(Material.BARRIER, 1);
@@ -411,6 +424,13 @@ public final class Main extends JavaPlugin {
         meta.setDisplayName(ChatColor.AQUA + "Soul Trail");
         item.setItemMeta(meta);
         EffectMenu.setItem(9, item);
+
+        item = new ItemStack(Material.OBSIDIAN);
+        meta = item.getItemMeta();
+        meta.setDisplayName(ChatColor.DARK_PURPLE + "Portal Trail");
+        item.setItemMeta(meta);
+        EffectMenu.setItem(11, item);
+
 
 
         //schließen

@@ -129,6 +129,20 @@ public class EffectInventoryEvent implements Listener {
                                 player.sendMessage(prefix + "Du hast diesen Trail noch nicht freigeschlaten. Kaufe ihn mit /shop");
                                 break;
                             }
+
+                        case 11:
+                            String PortalPermission = yamlConfiguration.getString("Permissions.Trails.portal");
+                            if (player.hasPermission(PortalPermission)) {
+                                trails.PortalTrail();
+                                player.closeInventory();
+                                player.updateInventory();
+                                break;
+
+                            }else {
+                                player.sendMessage(prefix + "Du hast diesen Trail noch nicht freigeschlaten. Kaufe ihn mit /shop");
+                                break;
+                        }
+
                         default:
                             break;
                     }
@@ -150,7 +164,6 @@ public class EffectInventoryEvent implements Listener {
         }
     }
 }
-
 
 
 

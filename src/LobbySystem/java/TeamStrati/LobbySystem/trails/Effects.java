@@ -136,5 +136,22 @@ public class Effects {
 
         }, 0, 1);
     }
+    public void PortalTrail(){
+        taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(Main.class), new Runnable() {
+
+            ParticleData particle = new ParticleData(player.getUniqueId());
+
+            @Override
+            public void run(){
+                if (!particle.hasID()) {
+                    particle.setID(taskID);
+                }
+
+                player.getWorld().spawnParticle(Particle.REVERSE_PORTAL, player.getLocation().add(0,0.70,0), 10);
+            }
+
+        }, 0, 1);
+    }
+
 
 }

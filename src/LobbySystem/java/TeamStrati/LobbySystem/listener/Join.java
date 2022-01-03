@@ -16,27 +16,37 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 
 import java.io.File;
+import java.util.UUID;
 
 
 public class Join implements Listener {
 
-    String UUID;
+    //String uuid;
 
     private File PlayerData = new File("plugins//LobbySystem//playerdata.yml");
     private YamlConfiguration PlayerDataList = YamlConfiguration.loadConfiguration(PlayerData);
+
+    private static File config = new File("plugins//LobbySystem//config.yml");
+    private static YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(config);
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         e.getPlayer().setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
         Player p = e.getPlayer();
-        UUID = p.getUniqueId().toString();
+        UUID uuid = p.getUniqueId();
         p.getInventory().clear();
 
-        if (PlayerDataList.contains("Orders.GrapplingHook." + UUID)){
+        if (PlayerDataList.contains("Orders.GrapplingHook." + uuid)){
             p.getInventory().addItem(ItemManager.GrapplingHook);
+            System.out.println("In Data list");
         }
+        System.out.println("nicht In Data list");
+        System.out.println(uuid);
         p.getInventory().setItem(8, ItemManager.EffectChest);
 
+        if (yamlConfiguration.getBoolean("use-ressource-pack") == true){
+            p.setResourcePack("https://jan-stratmann.de/uploads/cookieclicker.zip");
+        }
         e.setJoinMessage("");
 
         p.setGameMode(GameMode.SURVIVAL);

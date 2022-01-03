@@ -71,6 +71,10 @@
             <id>placeholderapi</id>
             <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
         </repository>
+        <repository>
+            <id>codemc-repo</id>
+            <url>https://repo.codemc.io/repository/maven-public/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -98,6 +102,7 @@
             <version>2.11.1</version>
             <scope>provided</scope>
         </dependency>
+
     </dependencies>
 
 </project>

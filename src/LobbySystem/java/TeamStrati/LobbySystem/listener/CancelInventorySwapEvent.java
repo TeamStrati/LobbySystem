@@ -13,9 +13,9 @@ public class CancelInventorySwapEvent implements Listener {
 
 
     @EventHandler
-    public void oninventoryclick(final InventoryClickEvent event) {
+    public void oninventoryclick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
-        if (CMD_Build.build.contains(player)) {
+        if (!CMD_Build.build.contains(player)) {
             try {
 
 

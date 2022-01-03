@@ -17,6 +17,7 @@ import org.bukkit.inventory.Inventory;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 import static TeamStrati.LobbySystem.Main.*;
 
@@ -26,7 +27,7 @@ public class ShopInventoryEvent implements Listener {
 
     Main plugin;
 
-    String UUID;
+    //String uuid;
 
     private File config = new File("plugins//LobbySystem//config.yml");
     private YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(config);
@@ -61,10 +62,10 @@ public class ShopInventoryEvent implements Listener {
 
 
                             //In config eintragen:
-                            UUID = player.getUniqueId().toString();
-                            if (!PlayerDataList.contains("Orders.GrapplingHook." + UUID)) {
+                            UUID uuid = player.getUniqueId();
+                            if (!PlayerDataList.contains("Orders.GrapplingHook." + uuid)) {
 
-                                PlayerDataList.set("Orders.GrapplingHook." + UUID, true);
+                                PlayerDataList.set("Orders.GrapplingHook." + uuid, true);
 
                                 try {
                                     PlayerDataList.save(this.PlayerData);

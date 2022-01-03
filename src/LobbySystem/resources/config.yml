@@ -42,9 +42,13 @@ Price:
   AngryHead: 0
   fire: 0
   soul: 0
+  portal: 0
 
   #Items
   grapplingHook: 0
+
+#Cookie Clicker Ressource Pack
+use-ressource-pack: true
 
 #Permissions
 Permissions:
@@ -55,9 +59,11 @@ Permissions:
     AngryVillager: 'LobbySystem.Trails.AngryVillager'
     fire: 'LobbySystem.Trails.fire'
     soul: 'LobbySystem.Trails.soul'
+    portal: 'LobbySystem.Trail.portal'
   build: 'LobbySystem.build'
   warps: 'LobbySystem.warps'
   map: 'LobbySystem.map'
+  setcookie: 'LobbySystem.setcookie'
 
 
 

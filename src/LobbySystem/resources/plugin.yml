@@ -6,6 +6,8 @@ authors: [ TeamStrati ]
 description: Lobby System mit einfachen Configurationen
 website: jan-stratmann.de
 depend: [Vault]
+softdepend: [HolographicDisplays]
+
 
 commands:
   spenden:
@@ -45,3 +47,6 @@ commands:
   bewerben:
     description: apply
     aliases: [apply]
+
+  setcookieclicker:
+    description: setcookieclicker
