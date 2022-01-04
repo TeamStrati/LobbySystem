@@ -53,7 +53,8 @@ public class CMD_Build implements CommandExecutor {
                         HideMeta.setDisplayName("§7§lSpieler versteckt");
                         Hide.setItemMeta(HideMeta);
                         for (final Player onlinePlayer : Bukkit.getOnlinePlayers()) {
-                            onlinePlayer.hidePlayer((Plugin)Main.getInstance(), onlinePlayer);
+                            onlinePlayer.hidePlayer(Main.getInstance(), onlinePlayer);
+
                         }
                         p.getInventory().setItem(5, Hide);
                     }

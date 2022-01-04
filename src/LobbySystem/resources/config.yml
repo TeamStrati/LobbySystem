@@ -30,8 +30,9 @@ Application:
   HoverMessage: 'Bewirb dich gerne'
   Link: 'https://teudaria.de/forum/'
 
-#Set how long it takes to use the Grappling Hook a second Time
+#Cooldowns:
 Grappling Hook Cooldown: 80
+Player Hider Cooldown: 20
 
 #Set how much the things in the Shop costs
 Price:
@@ -46,6 +47,63 @@ Price:
 
   #Items
   grapplingHook: 0
+
+#Navigator
+Navigator Items:
+  Slot1:
+    enabled: false
+    Material: 'STONE'
+    Display Name: '&atest'
+    Warp Name: "spawn"
+
+  Slot2:
+    enabled: false
+    Material: 'STONE'
+    Display Name: '&atest'
+    Warp Name: "spawn"
+
+  Slot3:
+    enabled: true
+    Material: 'MAGMA_CREAM'
+    Display Name: '§6§lSpawn'
+    Warp Name: "spawn"
+
+  Slot4:
+    enabled: false
+    Material: 'STONE'
+    Display Name: '&atest'
+    Warp Name: "spawn"
+
+  Slot5:
+    enabled: true
+    Material: 'IRON_AXE'
+    Display Name: '§b§lCityBuild'
+    Warp Name: "citybuild"
+
+  Slot6:
+    enabled: false
+    Material: 'STONE'
+    Display Name: '&atest'
+    Warp Name: "spawn"
+
+  Slot7:
+    enabled: true
+    Material: 'MUSIC_DISC_MALL'
+    Display Name: '§d§lMinigames'
+    Warp Name: "minigames"
+
+  Slot8:
+    enabled: false
+    Material: 'STONE'
+    Display Name: '&atest'
+    Warp Name: "spawn"
+
+  Slot9:
+    enabled: false
+    Material: 'STONE'
+    Display Name: '&atest'
+    Warp Name: "spawn"
+
 
 #Cookie Clicker Ressource Pack
 use-ressource-pack: true

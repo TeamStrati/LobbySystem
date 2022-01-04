@@ -11,11 +11,13 @@ public class ItemManager {
 
     public static ItemStack GrapplingHook;
     public static ItemStack EffectChest;
+    public static ItemStack ScaffoldTool;
 
 
     public static void init() {
         createGrapplingHook();
         createEffectChest();
+        createScaffoldTool();
 
     }
 
@@ -31,6 +33,19 @@ public class ItemManager {
         meta.setUnbreakable(true);
         item.setItemMeta(meta);
         GrapplingHook = item;
+    }
+
+    private static void createScaffoldTool(){
+        ItemStack item = new ItemStack(Material.LEATHER_BOOTS, 1);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName("§9Scaffold Tool");
+        List<String> lore = new ArrayList<>();
+        lore.add("§7Wie hacks!");
+
+        meta.setLore(lore);
+        meta.setUnbreakable(true);
+        item.setItemMeta(meta);
+        ScaffoldTool = item;
     }
 
     private static void createEffectChest(){

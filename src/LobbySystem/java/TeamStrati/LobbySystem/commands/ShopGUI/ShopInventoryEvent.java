@@ -5,7 +5,6 @@ import TeamStrati.LobbySystem.commands.ItemManager.ItemManager;
 import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.model.user.User;
 import net.milkbowl.vault.economy.EconomyResponse;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -19,7 +18,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
-import static TeamStrati.LobbySystem.Main.*;
+import static TeamStrati.LobbySystem.Main.econ;
+import static TeamStrati.LobbySystem.Main.prefix;
 
 
 
@@ -274,6 +274,38 @@ public class ShopInventoryEvent implements Listener {
                                     player.sendMessage(prefix + "Du besitzt diesen Trail bereits, wenn du geld ausgeben möchtest mach" + ChatColor.DARK_PURPLE + " /spenden");
                                 }
                             }
+                        if (e.getCurrentItem().getType() == Material.OBSIDIAN) {
+                            String portalPermission = yamlConfiguration.getString("Permissions.Trails.portal");
+
+                            if (!player.hasPermission(portalPermission)) {
+                                Integer Priceportal = yamlConfiguration.getInt("Price.portal");
+
+                                if (econ.getBalance(player) >= Priceportal) {
+                                    EconomyResponse r = econ.withdrawPlayer(player, Priceportal);
+                                    if (r.transactionSuccess()) {
+
+                                        player.closeInventory();
+                                        player.sendMessage(String.format(prefix + "Du hast für " + Priceportal + " Coins den Portal Trail gekauft!"));
+
+                                        User user = LuckPermsProvider.get().getPlayerAdapter(Player.class).getUser(player);
+                                        //Permission für Totem Trail geben
+                                        plugin.addPermission(user, portalPermission);
+
+
+                                    } else {
+                                        player.sendMessage(String.format(prefix + "An error occured: %s", r.errorMessage));
+                                    }
+                                } else {
+                                    player.sendMessage(String.format(prefix + "Du hast leider nicht genug geld"));
+                                    player.closeInventory();
+                                }
+
+
+                            } else {
+                                player.closeInventory();
+                                player.sendMessage(prefix + "Du besitzt diesen Trail bereits, wenn du geld ausgeben möchtest mach" + ChatColor.DARK_PURPLE + " /spenden");
+                            }
+                        }
 
                     }catch (NullPointerException ex){}
                 }

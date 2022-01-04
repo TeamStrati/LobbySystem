@@ -4,6 +4,7 @@ import TeamStrati.LobbySystem.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -13,6 +14,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 
+import java.io.File;
 import java.util.ArrayList;
 
 
@@ -21,9 +23,15 @@ public class PlayerHider implements Listener {
 
     ArrayList<String> onCooldown;
 
+
+    private File config = new File("plugins//LobbySystem//config.yml");
+    private YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(config);
+
     public PlayerHider() {
         this.onCooldown = new ArrayList<String>();
     }
+
+    Integer CoolDown = yamlConfiguration.getInt(("Player Hider Cooldown"));
 
     @EventHandler
     public void onInteract(final PlayerInteractEvent e) {
@@ -43,6 +51,7 @@ public class PlayerHider implements Listener {
                 for (final Player onlinePlayer : Bukkit.getOnlinePlayers()) {
                     e.getPlayer().showPlayer((Plugin)Main.getInstance(), onlinePlayer);
                 }
+                p.setCooldown(Material.LIME_DYE, CoolDown);
             }
             else {
                 final ItemStack Hide = new ItemStack(Material.GRAY_DYE);
@@ -57,8 +66,9 @@ public class PlayerHider implements Listener {
                 for (final Player onlinePlayer : Bukkit.getOnlinePlayers()) {
                     e.getPlayer().hidePlayer((Plugin)Main.getInstance(), onlinePlayer);
                 }
+                p.setCooldown(Material.GRAY_DYE, CoolDown);
             }
-            Bukkit.getScheduler().runTaskLater((Plugin)Main.getInstance(), () -> this.onCooldown.remove(p.getName()), 20L);
+            Bukkit.getScheduler().runTaskLater((Plugin)Main.getInstance(), () -> this.onCooldown.remove(p.getName()), CoolDown);
         }
     }
 

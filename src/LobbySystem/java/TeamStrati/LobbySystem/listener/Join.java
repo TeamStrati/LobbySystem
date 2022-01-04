@@ -72,6 +72,7 @@ public class Join implements Listener {
             }
             e.getPlayer().getInventory().setItem(5, Hide);
         }
+
         else {
             ItemStack Hide = new ItemStack(Material.LIME_DYE);
             ItemMeta HideMeta = Hide.getItemMeta();
@@ -79,6 +80,7 @@ public class Join implements Listener {
             Hide.setItemMeta(HideMeta);
             e.getPlayer().getInventory().setItem(5, Hide);
         }
+        //p.getInventory().setItem(2,ItemManager.ScaffoldTool);
         for (java.util.UUID onlinePlayer2 : Main.noplayersvisible) {
             if (Bukkit.getPlayer(onlinePlayer2) != null) {
                 Bukkit.getPlayer(onlinePlayer2).hidePlayer((Plugin)Main.getInstance(), e.getPlayer());

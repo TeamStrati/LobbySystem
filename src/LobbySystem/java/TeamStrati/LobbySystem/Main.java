@@ -79,6 +79,7 @@ public final class Main extends JavaPlugin {
         System.out.println("by TeamStrati");
         System.out.println(" Plugin erfolgreich geladen!");
         //this.loadConfig();
+        Main.instance = this;
         if (!new File(this.getDataFolder() + File.separator + "config.yml").exists()) {
             this.saveDefaultConfig();
         }
