@@ -1,5 +1,6 @@
 # Lobby System
 ![Features](/Pictures/features.png)
+- A configurable Navigator 
 - ```/shop```:
   Lobby Shop with Items and Effects
 - ```/build```:
