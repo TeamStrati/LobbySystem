@@ -52,15 +52,15 @@ Price:
 Navigator Items:
   Slot1:
     enabled: false
-    Material: 'STONE'
-    Display Name: '&atest'
-    Warp Name: "spawn"
+    Material: 'AIR'
+    Display Name: '&aNothing'
+    Warp Name: "no"
 
   Slot2:
     enabled: false
-    Material: 'STONE'
-    Display Name: '&atest'
-    Warp Name: "spawn"
+    Material: 'AIR'
+    Display Name: '&aNothing'
+    Warp Name: "no"
 
   Slot3:
     enabled: true
@@ -70,9 +70,9 @@ Navigator Items:
 
   Slot4:
     enabled: false
-    Material: 'STONE'
-    Display Name: '&atest'
-    Warp Name: "spawn"
+    Material: 'AIR'
+    Display Name: '&aNothing'
+    Warp Name: "no"
 
   Slot5:
     enabled: true
@@ -82,9 +82,9 @@ Navigator Items:
 
   Slot6:
     enabled: false
-    Material: 'STONE'
-    Display Name: '&atest'
-    Warp Name: "spawn"
+    Material: 'AIR'
+    Display Name: '&aNothing'
+    Warp Name: "no"
 
   Slot7:
     enabled: true
@@ -94,18 +94,18 @@ Navigator Items:
 
   Slot8:
     enabled: false
-    Material: 'STONE'
-    Display Name: '&atest'
-    Warp Name: "spawn"
+    Material: 'AIR'
+    Display Name: '&aNothing'
+    Warp Name: "no"
 
   Slot9:
     enabled: false
-    Material: 'STONE'
-    Display Name: '&atest'
-    Warp Name: "spawn"
+    Material: 'AIR'
+    Display Name: '&aNothing'
+    Warp Name: "no"
 
 
-#Cookie Clicker Ressource Pack
+#Cookie Clicker Ressource Pack (The Block is a Gold Block)
 use-ressource-pack: true
 
 #Permissions
@@ -126,6 +126,6 @@ Permissions:
 
 
 
-####################################
-#Plugin by TeamStrati and NupsNils #
-####################################
+#########################################
+#  Plugin by TeamStrati feat. NupsNils #
+########################################
