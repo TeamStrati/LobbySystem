@@ -17,12 +17,15 @@
 - CookieClicker: 
   - Special Texture Pack (Can be toggled in the config.yml)
   - ```/setcookieclicker```or place an Gold Block
-  
+- Simple Commands like ```/dc```, ```/website```, ```/rules```and ```/application```
 
 ![Config](/Pictures/config.png)
 - Set the Prefix
-- Changes the Time of the Grappling Hook Cooldown
+- Edit the Command Messages
+- Cooldown of some Items
 - Changes the Prices of the Shop
+- Items and Warps in the Navigator
+- Change if you want to have the Cookieclicker Texture Pack enabled on your Lobby
 - Change the Permissions
 
 ![Playerdata](/Pictures/playerdata.png)
@@ -40,4 +43,5 @@
 - [ ] More Tools
 - [ ] Fixing the Startup Bug
 - [x] Permissions in Config
+- [ ] Fix that on BungeeCord the Cookie Texture dont swap after switching to another Server
 
