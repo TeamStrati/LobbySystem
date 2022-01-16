@@ -2,6 +2,7 @@ package TeamStrati.LobbySystem.commands.ShopGUI;
 
 import TeamStrati.LobbySystem.Main;
 import TeamStrati.LobbySystem.commands.ItemManager.ItemManager;
+import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.model.user.User;
 import net.milkbowl.vault.economy.EconomyResponse;
@@ -63,7 +64,7 @@ public class ShopInventoryEvent implements Listener {
 
                             //In config eintragen:
                             UUID uuid = player.getUniqueId();
-                            if (!PlayerDataList.contains("Orders.GrapplingHook." + uuid)) {
+                            if (!player.hasPermission("LobbySystem.grapplinghook")) {
 
                                 PlayerDataList.set("Orders.GrapplingHook." + uuid, true);
 
@@ -79,6 +80,8 @@ public class ShopInventoryEvent implements Listener {
                                         player.getInventory().addItem(ItemManager.GrapplingHook);
                                         player.closeInventory();
                                         player.sendMessage(String.format(prefix + "Du hast für "+ PriceGH +" Coins eine Grappling Hook gekauft!"));
+                                        User user = LuckPermsProvider.get().getPlayerAdapter(Player.class).getUser(player);
+                                        plugin.addPermission(user, "LobbySystem.grapplinghook");
                                     } else {
                                         player.sendMessage(String.format(prefix + "An error occured: %s", r.errorMessage));
                                     }
@@ -185,7 +188,7 @@ public class ShopInventoryEvent implements Listener {
                         if (e.getCurrentItem().getType() == Material.FIRE_CHARGE) {
                             String EmeraldHaloPermission = yamlConfiguration.getString("Permissions.Trails.AngryVillager");
                             if (!player.hasPermission(EmeraldHaloPermission)) {
-                                Integer PriceTotem = yamlConfiguration.getInt("Price.AngryVillager");
+                                Integer PriceTotem = yamlConfiguration.getInt("Price.AngryHead");
                                 if (econ.getBalance(player) >= PriceTotem) {
                                     EconomyResponse r = econ.withdrawPlayer(player, PriceTotem);
                                     if (r.transactionSuccess()) {

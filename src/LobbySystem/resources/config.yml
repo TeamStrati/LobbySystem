@@ -30,6 +30,7 @@ Application:
   HoverMessage: 'Bewirb dich gerne'
   Link: 'https://teudaria.de/forum/'
 
+
 #Cooldowns:
 Grappling Hook Cooldown: 80
 Player Hider Cooldown: 20
@@ -122,6 +123,9 @@ Permissions:
   warps: 'LobbySystem.warps'
   map: 'LobbySystem.map'
   setcookie: 'LobbySystem.setcookie'
+
+
+
 
 
 

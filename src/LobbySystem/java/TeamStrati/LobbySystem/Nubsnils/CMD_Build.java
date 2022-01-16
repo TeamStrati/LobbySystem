@@ -39,7 +39,7 @@ public class CMD_Build implements CommandExecutor {
                     p.setGameMode(GameMode.SURVIVAL);
                     p.getInventory().clear();
                     UUID uuid = ((Player) sender).getUniqueId();
-                    if (PlayerDataList.contains("Orders.GrapplingHook." + uuid)){
+                    if (sender.hasPermission("LobbySystem.grapplinghook")){
                         p.getInventory().addItem(ItemManager.GrapplingHook);
                     }
                     final ItemStack Navi = new ItemStack(Material.COMPASS);

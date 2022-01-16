@@ -11,7 +11,7 @@ public class Quit implements Listener {
         ParticleData p = new ParticleData(event.getPlayer().getUniqueId());
         if(p.hasID())
             p.endTask();
-        event.getPlayer().setResourcePack("");
+
     }
 
 }

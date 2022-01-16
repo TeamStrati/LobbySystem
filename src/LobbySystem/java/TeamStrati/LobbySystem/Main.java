@@ -15,7 +15,6 @@ import TeamStrati.LobbySystem.listener.Join;
 import TeamStrati.LobbySystem.map.ImageCommand;
 import TeamStrati.LobbySystem.map.ImageManager;
 import TeamStrati.LobbySystem.trails.Quit;
-import me.clip.placeholderapi.PlaceholderAPI;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.model.user.User;
@@ -36,13 +35,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Objective;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-import java.util.function.Function;
 import java.util.logging.Logger;
 
 
@@ -55,6 +51,7 @@ public final class Main extends JavaPlugin {
     public static Economy econ = null;
     public static Permission perms = null;
     public static Chat chat = null;
+
 
     private static File config = new File("plugins//LobbySystem//config.yml");
     private static YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(config);
@@ -125,6 +122,7 @@ public final class Main extends JavaPlugin {
         this.getCommand("build").setExecutor((CommandExecutor) new CMD_Build());
         this.getCommand("setcookieclicker").setExecutor(new setCookieClicker());
         Bukkit.getPluginManager().registerEvents((Listener) new Listeners(), (Plugin) this);
+
 
 
         Bukkit.getPluginManager().registerEvents((Listener) new Navigator(), (Plugin) this);

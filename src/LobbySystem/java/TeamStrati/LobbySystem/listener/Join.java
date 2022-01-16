@@ -36,17 +36,18 @@ public class Join implements Listener {
         UUID uuid = p.getUniqueId();
         p.getInventory().clear();
 
-        if (PlayerDataList.contains("Orders.GrapplingHook." + uuid)){
+        if (p.hasPermission("LobbySystem.grapplinghook")){
             p.getInventory().addItem(ItemManager.GrapplingHook);
-            System.out.println("In Data list");
+
         }
-        System.out.println("nicht In Data list");
+
         System.out.println(uuid);
         p.getInventory().setItem(8, ItemManager.EffectChest);
 
-        if (yamlConfiguration.getBoolean("use-ressource-pack") == true){
-            p.setResourcePack("https://jan-stratmann.de/uploads/cookieclicker.zip");
-        }
+            if (yamlConfiguration.getBoolean("use-ressource-pack") == true) {
+                p.setResourcePack("https://jan-stratmann.de/uploads/cookieclicker.zip");
+            }
+
         e.setJoinMessage("");
 
         p.setGameMode(GameMode.SURVIVAL);
@@ -86,6 +87,7 @@ public class Join implements Listener {
                 Bukkit.getPlayer(onlinePlayer2).hidePlayer((Plugin)Main.getInstance(), e.getPlayer());
             }
         }
+
 
     }
 

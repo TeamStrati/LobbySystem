@@ -50,3 +50,6 @@ commands:
 
   setcookieclicker:
     description: setcookieclicker
+
+  parkour:
+    description: Parkour
